@@ -53,6 +53,7 @@
     <Compile Include="Configuration\IModWithOptionsPanel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Infrastructure.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
