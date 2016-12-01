@@ -35,8 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Assembly-CSharp.1.4.1\lib\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\Assembly-CSharp.1.6.0.4\lib\Assembly-CSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ColossalManaged, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ColossalManaged.1.6.0.4\lib\ColossalManaged.dll</HintPath>
@@ -46,8 +46,8 @@
       <HintPath>..\packages\ICities.1.6.0.4\lib\ICities.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6179.35827, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6179.35827\lib\net35\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
+    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6179.42032, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6179.42032\lib\net35\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
