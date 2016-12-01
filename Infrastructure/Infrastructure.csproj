@@ -39,15 +39,15 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ColossalManaged, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ColossalManaged.1.4.1\lib\ColossalManaged.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\ColossalManaged.1.6.0.4\lib\ColossalManaged.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ICities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ICities.1.4.1\lib\ICities.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\ICities.1.6.0.4\lib\ICities.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6000.33657, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6000.33657\lib\net35-Unity Full v3.5\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
+    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6172.38001, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6172.38001\lib\net45\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -59,8 +59,8 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UnityEngine.1.4.1\lib\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\UnityEngine.1.6.0.4\lib\UnityEngine.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
