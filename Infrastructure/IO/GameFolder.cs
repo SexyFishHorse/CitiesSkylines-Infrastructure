@@ -42,6 +42,9 @@
         Snapshots = 4,
 
         [FolderPath("WorkshopStagingArea")]
-        WorkshopStagingArea = 5
+        WorkshopStagingArea = 5,
+
+        [FolderPath("Configs")]
+        Configs = 6,
     }
 }

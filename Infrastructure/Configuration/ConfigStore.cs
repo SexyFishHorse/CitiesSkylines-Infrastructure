@@ -17,7 +17,7 @@
 
         public ConfigStore(string modFolderName)
         {
-            var modFolderPath = GamePaths.GetModFolderPath(GameFolder.Mods);
+            var modFolderPath = GamePaths.GetModFolderPath(GameFolder.Configs);
             modFolderPath = Path.Combine(modFolderPath, modFolderName);
 
             Directory.CreateDirectory(modFolderPath);
