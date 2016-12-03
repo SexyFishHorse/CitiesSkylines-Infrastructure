@@ -74,6 +74,7 @@
     <Compile Include="IO\FolderPathAttribute.cs" />
     <Compile Include="IUserModWithOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\Tuple.cs" />
     <Compile Include="UI\IStronglyTypedUiHelper.cs">
       <DependentUpon>StronglyTypedUiHelper.cs</DependentUpon>
     </Compile>
