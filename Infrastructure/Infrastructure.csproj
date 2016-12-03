@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Configuration\ConfigStore.cs" />
     <Compile Include="Configuration\ConfigurationManager.cs" />
+    <Compile Include="Configuration\ConfigurationManagerFactory.cs" />
     <Compile Include="Configuration\IConfigStore.cs">
       <DependentUpon>ConfigStore.cs</DependentUpon>
     </Compile>

@@ -10,18 +10,18 @@
 
     public class ConfigStore : IConfigStore
     {
-        public const string ConfigFileName = "ModConfiguration.xml";
+        public const string DefaultConfigFileName = "ModConfiguration.xml";
 
         private XmlSerializer serializer;
 
-        public ConfigStore(string modFolderName)
+        public ConfigStore(string modFolderName, string configFileName = DefaultConfigFileName)
         {
             var modFolderPath = GamePaths.GetModFolderPath(GameFolder.Configs);
             modFolderPath = Path.Combine(modFolderPath, modFolderName);
 
             Directory.CreateDirectory(modFolderPath);
 
-            ConfigFileInfo = new FileInfo(Path.Combine(modFolderPath, ConfigFileName));
+            ConfigFileInfo = new FileInfo(Path.Combine(modFolderPath, configFileName));
 
             serializer = new XmlSerializer(typeof(ModConfiguration));
 

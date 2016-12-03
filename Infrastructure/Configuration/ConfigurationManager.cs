@@ -5,31 +5,13 @@
 
     public class ConfigurationManager
     {
-        private static ConfigurationManager instance;
-
-        public static ConfigurationManager Instance
-        {
-            get
-            {
-                return instance ?? (instance = new ConfigurationManager());
-            }
-            set
-            {
-                instance = value;
-            }
-        }
-
-        public void Init(string modName)
-        {
-            configStore = new ConfigStore(modName);
-        }
-
-        private IConfigStore configStore;
+        private readonly IConfigStore configStore;
 
         private ModConfiguration configuration;
 
-        private ConfigurationManager()
+        public ConfigurationManager(string modName)
         {
+            configStore = new ConfigStore(modName, modName+".xml");
         }
 
         public T GetSetting<T>(string settingKey)
