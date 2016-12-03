@@ -17,5 +17,9 @@
         void SaveSetting<T>(string key, T value);
 
         bool HasSetting(string key);
+
+        ModConfiguration LoadConfigFromFile();
+
+        void SaveConfigToFile([NotNull] ModConfiguration modConfiguration);
     }
 }

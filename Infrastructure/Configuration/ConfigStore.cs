@@ -6,7 +6,6 @@
     using System.Linq;
     using System.Xml.Serialization;
     using IO;
-    using JetBrains.Annotations;
     using Validation.Arguments;
 
     public class ConfigStore : IConfigStore
@@ -92,7 +91,7 @@
             SaveConfigToFile(modConfiguration);
         }
 
-        private ModConfiguration LoadConfigFromFile()
+        public ModConfiguration LoadConfigFromFile()
         {
             if (!ConfigFileInfo.Exists)
             {
@@ -107,7 +106,7 @@
             }
         }
 
-        private void SaveConfigToFile([NotNull] ModConfiguration modConfiguration)
+        public void SaveConfigToFile(ModConfiguration modConfiguration)
         {
             using (var fileStream = ConfigFileInfo.Open(FileMode.Create, FileAccess.Write))
             {
