@@ -1,4 +1,4 @@
-﻿namespace SexyFishHorse.CitiesSkylines.Infrastructure.Configuration
+﻿namespace SexyFishHorse.CitiesSkylines.Infrastructure.UI.Configuration
 {
     using UI;
 

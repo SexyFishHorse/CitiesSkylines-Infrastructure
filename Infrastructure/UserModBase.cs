@@ -1,10 +1,10 @@
 ﻿namespace SexyFishHorse.CitiesSkylines.Infrastructure
 {
     using System.Diagnostics.CodeAnalysis;
-    using Configuration;
     using ICities;
     using JetBrains.Annotations;
     using UI;
+    using UI.Configuration;
 
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public abstract class UserModBase : IUserMod
@@ -23,7 +23,7 @@
             ConfigureOptionsPanel(uiHelper);
         }
 
-        protected virtual void ConfigureOptionsPanel(IStronglyTypedUiHelper uiHelper)
+        protected void ConfigureOptionsPanel(IStronglyTypedUiHelper uiHelper)
         {
             if (OptionsPanelManager != null)
             {
