@@ -11,15 +11,12 @@
 
         public ConfigurationManager(string modName)
         {
-            configStore = new ConfigStore(modName, modName+".xml");
+            configStore = new ConfigStore(modName, modName + ".xml");
         }
 
         public T GetSetting<T>(string settingKey)
         {
-            if (configuration == null)
-            {
-                configuration = configStore.LoadConfigFromFile();
-            }
+            EnsureConfigLoaded();
 
             if (configuration.Settings.Any(x => x.Key == settingKey))
             {
@@ -31,6 +28,8 @@
 
         public void SaveSetting(string settingKey, object value)
         {
+            EnsureConfigLoaded();
+
             if (configuration.Settings.Any(x => x.Key == settingKey))
             {
                 configuration.Settings.Remove(configuration.Settings.Single(x => x.Key == settingKey));
@@ -38,6 +37,39 @@
 
             var newKeyValuePair = new KeyValuePair<string, object>(settingKey, value);
             configuration.Settings.Add(newKeyValuePair);
+
+            configStore.SaveConfigToFile(configuration);
+        }
+
+        private void EnsureConfigLoaded()
+        {
+            if (configuration == null)
+            {
+                configuration = configStore.LoadConfigFromFile();
+            }
+        }
+
+        public void Migrate<T>(string oldSettingKey, string newSettingKey)
+        {
+            EnsureConfigLoaded();
+
+            if (configuration.Settings.All(x => x.Key != oldSettingKey))
+            {
+                return;
+            }
+
+            var settingValue = configuration.Settings.Single(x => x.Key == oldSettingKey);
+
+            RemoveSetting(oldSettingKey);
+            SaveSetting(newSettingKey, (T)settingValue.Value);
+
+            configStore.SaveConfigToFile(configuration);
+        }
+
+        private void RemoveSetting(string settingKey)
+        {
+            var setting = configuration.Settings.FirstOrDefault(x => x.Key == settingKey);
+            configuration.Settings.Remove(setting);
 
             configStore.SaveConfigToFile(configuration);
         }
