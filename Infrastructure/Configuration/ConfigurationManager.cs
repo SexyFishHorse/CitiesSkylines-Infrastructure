@@ -49,7 +49,7 @@
             return default(T);
         }
 
-        public void Migrate<T>(string settingKey, string newSettingKey)
+        public void MigrateKey<T>(string settingKey, string newSettingKey)
         {
             EnsureConfigLoaded();
 
@@ -68,7 +68,7 @@
             TryLog("Migrated {0} to {1}", settingKey, newSettingKey);
         }
 
-        public void Migrate<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConvertionFunction)
+        public void MigrateType<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConvertionFunction)
         {
             if (configuration.Settings.All(x => x.Key != settingKey))
             {
