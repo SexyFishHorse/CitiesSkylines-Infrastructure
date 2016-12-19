@@ -49,23 +49,43 @@
             return default(T);
         }
 
-        public void Migrate<T>(string oldSettingKey, string newSettingKey)
+        public void Migrate<T>(string settingKey, string newSettingKey)
         {
             EnsureConfigLoaded();
 
-            if (configuration.Settings.All(x => x.Key != oldSettingKey))
+            if (configuration.Settings.All(x => x.Key != settingKey))
             {
                 return;
             }
 
-            var settingValue = configuration.Settings.Single(x => x.Key == oldSettingKey);
+            var settingValue = configuration.Settings.Single(x => x.Key == settingKey);
 
-            RemoveSetting(oldSettingKey);
+            RemoveSetting(settingKey);
             SaveSetting(newSettingKey, (T)settingValue.Value);
 
             configStore.SaveConfigToFile(configuration);
 
-            TryLog("Migrated {0} to {1}", oldSettingKey, newSettingKey);
+            TryLog("Migrated {0} to {1}", settingKey, newSettingKey);
+        }
+
+        public void Migrate<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConvertionFunction)
+        {
+            if (configuration.Settings.All(x => x.Key != settingKey))
+            {
+                return;
+            }
+
+            var settingValue = configuration.Settings.Single(x => x.Key == settingKey).Value;
+            if (settingValue.GetType().FullName == typeof(TTarget).FullName)
+            {
+                return;
+            }
+
+            var newValue = typeConvertionFunction.Invoke((TOrigin)settingValue);
+
+            SaveSetting(settingKey, newValue);
+
+            TryLog("Converted value '{0}' from type {1} to {2}", settingValue, typeof(TOrigin).Name, typeof(TTarget).Name);
         }
 
         public void SaveSetting(string settingKey, object value)
@@ -82,7 +102,7 @@
 
             configStore.SaveConfigToFile(configuration);
 
-            TryLog("Saved setting " + settingKey + " with value " + value);
+            TryLog("Saved setting {0} with value {1}", settingKey, value);
         }
 
         private void EnsureConfigLoaded()
