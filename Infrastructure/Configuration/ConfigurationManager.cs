@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using JetBrains.Annotations;
-    using SexyFishHorse.CitiesSkylines.Logger;
+    using Logger;
 
     public class ConfigurationManager
     {
@@ -12,9 +12,14 @@
 
         private ModConfiguration configuration;
 
-        public ConfigurationManager(string modName)
+        public static ConfigurationManager Create(string modName)
         {
-            configStore = new ConfigStore(modName, modName + ".xml");
+            return new ConfigurationManager(new ConfigStore(modName, modName + ".xml"));
+        }
+
+        public ConfigurationManager(IConfigStore configStore)
+        {
+            this.configStore = configStore;
         }
 
         public ILogger Logger { get; set; }
@@ -33,7 +38,7 @@
                 catch (InvalidCastException ex)
                 {
                     var message = string.Format(
-                        "Tried to cast value '{0}' of type '{1}' to '{2}'.",
+                        "Tried to cast value '{0}' of type {1} to {2}.",
                         value,
                         value.GetType().Name,
                         typeof(T).Name);
@@ -49,23 +54,45 @@
             return default(T);
         }
 
-        public void Migrate<T>(string oldSettingKey, string newSettingKey)
+        public void MigrateKey<T>(string settingKey, string newSettingKey)
         {
             EnsureConfigLoaded();
 
-            if (configuration.Settings.All(x => x.Key != oldSettingKey))
+            if (configuration.Settings.All(x => x.Key != settingKey))
             {
                 return;
             }
 
-            var settingValue = configuration.Settings.Single(x => x.Key == oldSettingKey);
+            var settingValue = configuration.Settings.Single(x => x.Key == settingKey);
 
-            RemoveSetting(oldSettingKey);
+            RemoveSetting(settingKey);
             SaveSetting(newSettingKey, (T)settingValue.Value);
 
             configStore.SaveConfigToFile(configuration);
 
-            TryLog("Migrated {0} to {1}", oldSettingKey, newSettingKey);
+            TryLog("Migrated {0} to {1}", settingKey, newSettingKey);
+        }
+
+        public void MigrateType<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConvertionFunction)
+        {
+            EnsureConfigLoaded();
+
+            if (configuration.Settings.All(x => x.Key != settingKey))
+            {
+                return;
+            }
+
+            var settingValue = configuration.Settings.Single(x => x.Key == settingKey).Value;
+            if (settingValue.GetType().FullName == typeof(TTarget).FullName)
+            {
+                return;
+            }
+
+            var newValue = typeConvertionFunction.Invoke((TOrigin)settingValue);
+
+            SaveSetting(settingKey, newValue);
+
+            TryLog("Converted value '{0}' from type {1} to {2}", settingValue, typeof(TOrigin).Name, typeof(TTarget).Name);
         }
 
         public void SaveSetting(string settingKey, object value)
@@ -82,7 +109,7 @@
 
             configStore.SaveConfigToFile(configuration);
 
-            TryLog("Saved setting " + settingKey + " with value " + value);
+            TryLog("Saved setting {0} with value {1}", settingKey, value);
         }
 
         private void EnsureConfigLoaded()
