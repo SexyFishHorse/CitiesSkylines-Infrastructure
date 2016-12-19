@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using JetBrains.Annotations;
-    using SexyFishHorse.CitiesSkylines.Logger;
+    using Logger;
 
     public class ConfigurationManager
     {
@@ -12,9 +12,14 @@
 
         private ModConfiguration configuration;
 
-        public ConfigurationManager(string modName)
+        public static ConfigurationManager Create(string modName)
         {
-            configStore = new ConfigStore(modName, modName + ".xml");
+            return new ConfigurationManager(new ConfigStore(modName, modName + ".xml"));
+        }
+
+        public ConfigurationManager(IConfigStore configStore)
+        {
+            this.configStore = configStore;
         }
 
         public ILogger Logger { get; set; }
@@ -33,7 +38,7 @@
                 catch (InvalidCastException ex)
                 {
                     var message = string.Format(
-                        "Tried to cast value '{0}' of type '{1}' to '{2}'.",
+                        "Tried to cast value '{0}' of type {1} to {2}.",
                         value,
                         value.GetType().Name,
                         typeof(T).Name);
@@ -70,6 +75,8 @@
 
         public void MigrateType<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConvertionFunction)
         {
+            EnsureConfigLoaded();
+
             if (configuration.Settings.All(x => x.Key != settingKey))
             {
                 return;

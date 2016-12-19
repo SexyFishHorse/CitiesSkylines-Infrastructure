@@ -10,7 +10,7 @@
         {
             if (!Managers.ContainsKey(modName))
             {
-                Managers.Add(new KeyValuePair<string, ConfigurationManager>(modName, new ConfigurationManager(modName)));
+                Managers.Add(new KeyValuePair<string, ConfigurationManager>(modName, ConfigurationManager.Create(modName)));
             }
 
             return Managers[modName];
