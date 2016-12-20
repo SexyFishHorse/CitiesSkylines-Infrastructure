@@ -173,5 +173,83 @@
                 configStore.Verify(x => x.SaveConfigToFile(It.IsAny<ModConfiguration>()), Times.Once);
             }
         }
+
+        public class MigrateKeyMethod : ConfigurationManagerClass
+        {
+            [Fact]
+            public void ShouldLoadConfigFromDiscOnFirstCall()
+            {
+                var configStore = fixture.Freeze<Mock<IConfigStore>>();
+                var instance = fixture.Freeze<ConfigurationManager>();
+
+                instance.MigrateKey<string>(fixture.Create<string>(), fixture.Create<string>());
+
+                configStore.Verify(x => x.LoadConfigFromFile(), Times.Once);
+            }
+
+            [Fact]
+            public void ShouldNotCallSaveWhenSettingIsNotFound()
+            {
+                var configStore = fixture.Freeze<Mock<IConfigStore>>();
+                var instance = fixture.Freeze<ConfigurationManager>();
+
+                instance.MigrateKey<string>(fixture.Create<string>(), fixture.Create<string>());
+
+                configStore.Verify(x => x.SaveConfigToFile(It.IsAny<ModConfiguration>()), Times.Never);
+            }
+
+            [Fact]
+            public void ShouldRemoveOldSetting()
+            {
+                var oldSettingKey = fixture.Create<string>();
+                var modConfig = fixture.Create<ModConfiguration>();
+                modConfig.Settings.Add(new KeyValuePair<string, object>(oldSettingKey, fixture.Create<string>()));
+
+                fixture.Freeze<Mock<IConfigStore>>().Setup(x => x.LoadConfigFromFile()).Returns(modConfig);
+
+                var instance = fixture.Freeze<ConfigurationManager>();
+
+                instance.MigrateKey<string>(oldSettingKey, fixture.Create<string>());
+
+                modConfig.Settings.Should().NotContain(x => x.Key == oldSettingKey);
+            }
+
+            [Fact]
+            public void ShouldAddNewSetting()
+            {
+                var oldSettingKey = fixture.Create<string>();
+                var newSettingKey = fixture.Create<string>();
+                var value = fixture.Create<string>();
+                var modConfig = fixture.Create<ModConfiguration>();
+                modConfig.Settings.Add(new KeyValuePair<string, object>(oldSettingKey, value));
+
+                fixture.Freeze<Mock<IConfigStore>>().Setup(x => x.LoadConfigFromFile()).Returns(modConfig);
+
+                var instance = fixture.Freeze<ConfigurationManager>();
+
+                instance.MigrateKey<string>(oldSettingKey, newSettingKey);
+
+                modConfig.Settings.Should().Contain(x => x.Key == newSettingKey && x.Value.Equals(value));
+            }
+
+            [Fact]
+            public void ShouldCallSave()
+            {
+                var oldSettingKey = fixture.Create<string>();
+                var newSettingKey = fixture.Create<string>();
+                var value = fixture.Create<string>();
+                var modConfig = fixture.Create<ModConfiguration>();
+                modConfig.Settings.Add(new KeyValuePair<string, object>(oldSettingKey, value));
+
+                var configStore = fixture.Freeze<Mock<IConfigStore>>();
+                configStore.Setup(x => x.LoadConfigFromFile()).Returns(modConfig);
+
+                var instance = fixture.Freeze<ConfigurationManager>();
+
+                instance.MigrateKey<string>(oldSettingKey, newSettingKey);
+
+                configStore.Verify(x => x.SaveConfigToFile(It.IsAny<ModConfiguration>()), Times.AtLeastOnce);
+            }
+        }
     }
 }
