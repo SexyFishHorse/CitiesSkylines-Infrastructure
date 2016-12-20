@@ -68,8 +68,6 @@
             RemoveSetting(settingKey);
             SaveSetting(newSettingKey, (T)settingValue.Value);
 
-            configStore.SaveConfigToFile(configuration);
-
             TryLog("Migrated {0} to {1}", settingKey, newSettingKey);
         }
 
