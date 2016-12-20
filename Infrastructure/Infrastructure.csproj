@@ -35,19 +35,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Assembly-CSharp.1.6.0.4\lib\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\Assembly-CSharp.1.6.1.2\lib\Assembly-CSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ColossalManaged, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ColossalManaged.1.6.0.4\lib\ColossalManaged.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\ColossalManaged.1.6.1.2\lib\ColossalManaged.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="ICities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ICities.1.6.0.4\lib\ICities.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\ICities.1.6.1.2\lib\ICities.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6181.27071, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6181.27071\lib\net35\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
+    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6198.39436, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6198.39436\lib\net35\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -57,8 +57,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\UnityEngine.1.6.0.4\lib\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\UnityEngine.1.6.1.2\lib\UnityEngine.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
