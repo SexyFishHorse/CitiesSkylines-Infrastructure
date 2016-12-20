@@ -68,7 +68,7 @@
             RemoveSetting(settingKey);
             SaveSetting(newSettingKey, (T)settingValue.Value);
 
-            TryLog("Migrated {0} to {1}", settingKey, newSettingKey);
+            TryLog("Migrated setting {0} to {1}", settingKey, newSettingKey);
         }
 
         public void MigrateType<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConvertionFunction)
@@ -90,7 +90,7 @@
 
             SaveSetting(settingKey, newValue);
 
-            TryLog("Converted value '{0}' from type {1} to {2}", settingValue, typeof(TOrigin).Name, typeof(TTarget).Name);
+            TryLog("Converted value '{0}' from type {1} to {2}", settingKey, typeof(TOrigin).Name, typeof(TTarget).Name);
         }
 
         public void SaveSetting(string settingKey, object value)
