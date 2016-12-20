@@ -111,6 +111,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Configuration\ConfigurationManagerClass.cs" />
+    <Compile Include="IO\GamePathsClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
