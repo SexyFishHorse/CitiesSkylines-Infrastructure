@@ -10,7 +10,7 @@
         {
             if (value == null)
             {
-                throw new ArgumentNullException("parameterName");
+                throw new ArgumentNullException(parameterName);
             }
         }
     }
