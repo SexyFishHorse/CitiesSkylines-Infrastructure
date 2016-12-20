@@ -19,13 +19,11 @@
             }
 
             [Fact]
-            public void ShouldThrowArgumentNullExceptionWhenCollectionIsNull()
+            public void ShouldNotThrowExceptionWhenCollectionIsNotEmpty()
             {
-                var parameterName = fixture.Create<string>();
-                List<string> list = null;
+                var list = fixture.CreateMany<string>();
 
-                // ReSharper disable once ExpressionIsAlwaysNull
-                list.Invoking(x => x.ShouldNotBeNullOrEmpty(parameterName)).ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be(parameterName);
+                list.Invoking(x => x.ShouldNotBeNullOrEmpty(fixture.Create<string>())).ShouldNotThrow();
             }
 
             [Fact]
@@ -34,15 +32,23 @@
                 var parameterName = fixture.Create<string>();
                 var list = new List<string>();
 
-                list.Invoking(x => x.ShouldNotBeNullOrEmpty(parameterName)).ShouldThrow<ArgumentException>().And.ParamName.Should().Be(parameterName);
+                list.Invoking(x => x.ShouldNotBeNullOrEmpty(parameterName))
+                    .ShouldThrow<ArgumentException>()
+                    .And.ParamName.Should()
+                    .Be(parameterName);
             }
 
             [Fact]
-            public void ShouldNotThrowExceptionWhenCollectionIsNotEmpty()
+            public void ShouldThrowArgumentNullExceptionWhenCollectionIsNull()
             {
-                var list = fixture.CreateMany<string>();
+                var parameterName = fixture.Create<string>();
+                List<string> list = null;
 
-                list.Invoking(x => x.ShouldNotBeNullOrEmpty(fixture.Create<string>())).ShouldNotThrow();
+                // ReSharper disable once ExpressionIsAlwaysNull
+                list.Invoking(x => x.ShouldNotBeNullOrEmpty(parameterName))
+                    .ShouldThrow<ArgumentNullException>()
+                    .And.ParamName.Should()
+                    .Be(parameterName);
             }
         }
     }
