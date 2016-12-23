@@ -11,7 +11,7 @@
 
         T GetSetting<T>(string settingKey);
 
-        bool HasValue(string settingKey);
+        bool HasSetting(string settingKey);
 
         void MigrateKey<T>(string settingKey, string newSettingKey);
 

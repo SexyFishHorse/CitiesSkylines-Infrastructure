@@ -54,7 +54,7 @@
             return default(T);
         }
 
-        public bool HasValue(string settingKey)
+        public bool HasSetting(string settingKey)
         {
             EnsureConfigLoaded();
 
