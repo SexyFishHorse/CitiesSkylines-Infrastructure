@@ -68,6 +68,7 @@
     <Compile Include="Configuration\IConfigStore.cs">
       <DependentUpon>ConfigStore.cs</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\IConfigurationManager.cs" />
     <Compile Include="UI\Configuration\IOptionsPanelManager.cs" />
     <Compile Include="Configuration\ModConfiguration.cs" />
     <Compile Include="Extensions\LoadModeExtensions.cs" />

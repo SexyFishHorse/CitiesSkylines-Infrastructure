@@ -6,16 +6,11 @@
     using JetBrains.Annotations;
     using Logger;
 
-    public class ConfigurationManager
+    public class ConfigurationManager : IConfigurationManager
     {
         private readonly IConfigStore configStore;
 
         private ModConfiguration configuration;
-
-        public static ConfigurationManager Create(string modName)
-        {
-            return new ConfigurationManager(new ConfigStore(modName, modName + ".xml"));
-        }
 
         public ConfigurationManager(IConfigStore configStore)
         {
@@ -23,6 +18,11 @@
         }
 
         public ILogger Logger { get; set; }
+
+        public static IConfigurationManager Create(string modName)
+        {
+            return new ConfigurationManager(new ConfigStore(modName, modName + ".xml"));
+        }
 
         public T GetSetting<T>(string settingKey)
         {
@@ -52,6 +52,13 @@
             TryLog("No setting found for {0}", settingKey);
 
             return default(T);
+        }
+
+        public bool HasValue(string settingKey)
+        {
+            EnsureConfigLoaded();
+
+            return configuration.Settings.Any(x => x.Key == settingKey);
         }
 
         public void MigrateKey<T>(string settingKey, string newSettingKey)

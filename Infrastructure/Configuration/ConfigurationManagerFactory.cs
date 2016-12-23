@@ -4,13 +4,13 @@
 
     public static class ConfigurationManagerFactory
     {
-        private static readonly IDictionary<string, ConfigurationManager> Managers = new Dictionary<string, ConfigurationManager>();
+        private static readonly IDictionary<string, IConfigurationManager> Managers = new Dictionary<string, IConfigurationManager>();
 
-        public static ConfigurationManager GetOrCreateConfigurationManager(string modName)
+        public static IConfigurationManager GetOrCreateConfigurationManager(string modName)
         {
             if (!Managers.ContainsKey(modName))
             {
-                Managers.Add(new KeyValuePair<string, ConfigurationManager>(modName, ConfigurationManager.Create(modName)));
+                Managers.Add(new KeyValuePair<string, IConfigurationManager>(modName, ConfigurationManager.Create(modName)));
             }
 
             return Managers[modName];
