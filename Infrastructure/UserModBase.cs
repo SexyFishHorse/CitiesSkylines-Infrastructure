@@ -5,6 +5,7 @@
     using JetBrains.Annotations;
     using UI;
     using UI.Configuration;
+    using UI.Extensions;
 
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public abstract class UserModBase : IUserMod
