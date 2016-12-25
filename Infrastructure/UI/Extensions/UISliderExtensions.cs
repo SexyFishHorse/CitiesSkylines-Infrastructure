@@ -8,11 +8,19 @@
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class UiSliderExtensions
     {
+
+        [NotNull]
+        public static UILabel GetLabel(this UISlider slider)
+        {
+            var panel = slider.GetComponentInParent<UIPanel>();
+
+            return panel.Find<UILabel>("Label");
+        }
+
         [CanBeNull]
         public static string GetLabelText(this UISlider slider)
         {
-            var panel = slider.GetComponentInParent<UIPanel>();
-            var uiLabel = panel.Find<UILabel>("Label");
+            var uiLabel = slider.GetLabel();
 
             return uiLabel.text;
         }
@@ -22,8 +30,7 @@
         {
             label.ShouldNotBeNullOrEmpty("label");
 
-            var panel = slider.GetComponentInParent<UIPanel>();
-            var uiLabel = panel.Find<UILabel>("Label");
+            var uiLabel = slider.GetLabel();
 
             if (args != null && args.Any())
             {
