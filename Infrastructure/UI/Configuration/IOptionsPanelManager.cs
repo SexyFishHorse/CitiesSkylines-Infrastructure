@@ -4,6 +4,6 @@
 
     public interface IOptionsPanelManager
     {
-        void ConfigureOptionsPanel(IStronglyTypedUiHelper uiHelper);
+        void ConfigureOptionsPanel(IStronglyTypedUIHelper uiHelper);
     }
 }

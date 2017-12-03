@@ -6,9 +6,9 @@
     using SexyFishHorse.CitiesSkylines.Infrastructure.Validation.Arguments;
 
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
-    public class StronglyTypedUiHelper : IStronglyTypedUiHelper
+    public class StronglyTypedUIHelper : IStronglyTypedUIHelper
     {
-        public StronglyTypedUiHelper([NotNull] UIHelperBase uiHelper)
+        public StronglyTypedUIHelper([NotNull] UIHelperBase uiHelper)
         {
             UiHelper = uiHelper;
         }
@@ -44,9 +44,9 @@
             return (UIDropDown)UiHelper.AddDropdown(label, values, selectedIndex, selectionChangedEvent);
         }
 
-        public StronglyTypedUiHelper AddGroup(string label)
+        public StronglyTypedUIHelper AddGroup(string label)
         {
-            return new StronglyTypedUiHelper(UiHelper.AddGroup(label));
+            return new StronglyTypedUIHelper(UiHelper.AddGroup(label));
         }
 
         public UISlider AddSlider(

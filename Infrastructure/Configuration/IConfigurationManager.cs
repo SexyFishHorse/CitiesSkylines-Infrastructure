@@ -15,7 +15,7 @@
 
         void MigrateKey<T>(string settingKey, string newSettingKey);
 
-        void MigrateType<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConvertionFunction);
+        void MigrateType<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConversionFunction);
 
         void SaveSetting(string settingKey, object value);
     }

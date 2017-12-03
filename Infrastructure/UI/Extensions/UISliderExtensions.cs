@@ -8,7 +8,6 @@
     [UsedImplicitly(ImplicitUseTargetFlags.WithMembers)]
     public static class UiSliderExtensions
     {
-
         [NotNull]
         public static UILabel GetLabel(this UISlider slider)
         {

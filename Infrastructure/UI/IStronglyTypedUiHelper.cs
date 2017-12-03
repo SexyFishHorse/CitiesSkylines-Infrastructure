@@ -5,7 +5,7 @@
     using JetBrains.Annotations;
 
     [UsedImplicitly(ImplicitUseTargetFlags.Members)]
-    public interface IStronglyTypedUiHelper
+    public interface IStronglyTypedUIHelper
     {
         [NotNull]
         UIHelperBase UiHelper { get; }
@@ -24,7 +24,7 @@
             [NotNull] OnDropdownSelectionChanged selectionChangedEvent);
 
         [NotNull]
-        StronglyTypedUiHelper AddGroup(string label);
+        StronglyTypedUIHelper AddGroup(string label);
 
         [NotNull]
         UISlider AddSlider(
