@@ -1,5 +1,6 @@
 ﻿namespace SexyFishHorse.CitiesSkylines.Infrastructure.Configuration
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -41,7 +42,22 @@
             var modConfiguration = LoadConfigFromFile();
             if (modConfiguration.Settings.Any(x => x.Key == key))
             {
-                return (T)modConfiguration.Settings.Single(x => x.Key == key).Value;
+                var value = modConfiguration.Settings.Single(x => x.Key == key).Value;
+
+                try
+                {
+                    return (T)value;
+                }
+                catch (InvalidCastException ex)
+                {
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "Unable to cast setting value \"{0}\" from type \"{1}\" to type \"{2}\".",
+                            value,
+                            value.GetType().Name,
+                            typeof(T).Name),
+                        ex);
+                }
             }
 
             return default(T);
