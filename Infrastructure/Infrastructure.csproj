@@ -43,9 +43,8 @@
     <Reference Include="ICities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ICities.1.9.0.5\lib\net35\ICities.dll</HintPath>
     </Reference>
-    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6198.39436, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6198.39436\lib\net35\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6546.18552, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6546.18552\lib\net35\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

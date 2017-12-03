@@ -68,9 +68,8 @@
     <Reference Include="Ploeh.AutoFixture.AutoMoq, Version=3.51.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoFixture.AutoMoq.3.51.0\lib\net40\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
     </Reference>
-    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6198.39436, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6198.39436\lib\net35\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="SexyFishHorse.CitiesSkylines.Logger, Version=1.0.6546.18552, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SexyFishHorse.CitiesSkylines.Logger.1.0.6546.18552\lib\net35\SexyFishHorse.CitiesSkylines.Logger.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
