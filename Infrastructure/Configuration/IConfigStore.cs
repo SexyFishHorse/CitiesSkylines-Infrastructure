@@ -10,14 +10,15 @@
         FileInfo ConfigFileInfo { get; }
 
         [CanBeNull]
-        T GetSetting<T>(string key);
+        T GetSetting<T>([NotNull] string key);
 
-        void RemoveSetting(string key);
+        void RemoveSetting([NotNull] string key);
 
-        void SaveSetting<T>(string key, T value);
+        void SaveSetting<T>([NotNull] string key, [NotNull] T value);
 
-        bool HasSetting(string key);
+        bool HasSetting([NotNull] string key);
 
+        [NotNull]
         ModConfiguration LoadConfigFromFile();
 
         void SaveConfigToFile([NotNull] ModConfiguration modConfiguration);

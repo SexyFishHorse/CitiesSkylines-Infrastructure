@@ -1,6 +1,5 @@
 ﻿namespace SexyFishHorse.CitiesSkylines.Infrastructure
 {
-    using System.Diagnostics.CodeAnalysis;
     using ICities;
     using JetBrains.Annotations;
     using UI;
@@ -16,7 +15,6 @@
 
         protected IOptionsPanelManager OptionsPanelManager { get; set; }
 
-        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public void OnSettingsUI(UIHelperBase uiHelperBase)
         {
             var uiHelper = uiHelperBase.AsStronglyTyped();
@@ -24,7 +22,7 @@
             ConfigureOptionsPanel(uiHelper);
         }
 
-        protected void ConfigureOptionsPanel(IStronglyTypedUiHelper uiHelper)
+        protected void ConfigureOptionsPanel(IStronglyTypedUIHelper uiHelper)
         {
             if (OptionsPanelManager != null)
             {

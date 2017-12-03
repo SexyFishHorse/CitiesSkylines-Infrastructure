@@ -67,6 +67,10 @@
     <Compile Include="Configuration\IConfigurationManager.cs">
       <DependentUpon>ConfigurationManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="IO\FileSystemWrapper.cs" />
+    <Compile Include="IO\IFileSystemWrapper.cs" />
+    <Compile Include="IO\IXmlFileSystem.cs" />
+    <Compile Include="IO\XmlFileSystem.cs" />
     <Compile Include="UI\Configuration\IOptionsPanelManager.cs" />
     <Compile Include="Configuration\ModConfiguration.cs" />
     <Compile Include="Extensions\LoadModeExtensions.cs" />
@@ -78,10 +82,10 @@
     <Compile Include="Common\Tuple.cs" />
     <Compile Include="UI\Extensions\UISliderExtensions.cs" />
     <Compile Include="UI\IStronglyTypedUiHelper.cs">
-      <DependentUpon>StronglyTypedUiHelper.cs</DependentUpon>
+      <DependentUpon>StronglyTypedUIHelper.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\StronglyTypedUiHelper.cs" />
-    <Compile Include="UI\Extensions\UiHelperBaseExtensions.cs" />
+    <Compile Include="UI\StronglyTypedUIHelper.cs" />
+    <Compile Include="UI\Extensions\UIHelperBaseExtensions.cs" />
     <Compile Include="UserModBase.cs" />
     <Compile Include="Validation\Arguments\FloatExtensions.cs" />
     <Compile Include="Validation\Arguments\EnumerableExtensions.cs" />

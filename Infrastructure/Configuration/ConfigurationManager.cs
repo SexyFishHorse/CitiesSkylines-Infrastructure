@@ -78,7 +78,7 @@
             TryLog("Migrated setting {0} to {1}", settingKey, newSettingKey);
         }
 
-        public void MigrateType<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConvertionFunction)
+        public void MigrateType<TOrigin, TTarget>(string settingKey, Func<TOrigin, TTarget> typeConversionFunction)
         {
             EnsureConfigLoaded();
 
@@ -93,7 +93,7 @@
                 return;
             }
 
-            var newValue = typeConvertionFunction.Invoke((TOrigin)settingValue);
+            var newValue = typeConversionFunction.Invoke((TOrigin)settingValue);
 
             SaveSetting(settingKey, newValue);
 
