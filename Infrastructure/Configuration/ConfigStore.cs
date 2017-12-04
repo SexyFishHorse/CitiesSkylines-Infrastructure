@@ -13,6 +13,8 @@
 
         private readonly IXmlFileSystem<ModConfiguration> fileSystemWrapper;
 
+        private readonly ModConfiguration cachedConfigs;
+
         public ConfigStore(
             string modFolderName,
             string configFileName = DefaultConfigFileName,
@@ -31,6 +33,8 @@
             {
                 SaveConfigToFile(new ModConfiguration());
             }
+
+            cachedConfigs = LoadConfigFromFile();
         }
 
         public FileInfo ConfigFileInfo { get; private set; }
@@ -39,10 +43,9 @@
         {
             key.ShouldNotBeNull("key");
 
-            var modConfiguration = LoadConfigFromFile();
-            if (modConfiguration.Settings.Any(x => x.Key == key))
+            if (cachedConfigs.Settings.Any(x => x.Key == key))
             {
-                var value = modConfiguration.Settings.Single(x => x.Key == key).Value;
+                var value = cachedConfigs.Settings.Single(x => x.Key == key).Value;
 
                 try
                 {
@@ -67,9 +70,7 @@
         {
             key.ShouldNotBeNullOrEmpty("key");
 
-            var config = LoadConfigFromFile();
-
-            return config.Settings.Any(x => x.Key == key);
+            return cachedConfigs.Settings.Any(x => x.Key == key);
         }
 
         public ModConfiguration LoadConfigFromFile()
@@ -86,11 +87,9 @@
         {
             key.ShouldNotBeNull("key");
 
-            var config = LoadConfigFromFile();
+            cachedConfigs.Settings.Remove(cachedConfigs.Settings.Find(x => x.Key == key));
 
-            config.Settings.Remove(config.Settings.Find(x => x.Key == key));
-
-            SaveConfigToFile(config);
+            SaveConfigToFile(cachedConfigs);
         }
 
         public void SaveConfigToFile(ModConfiguration modConfiguration)
