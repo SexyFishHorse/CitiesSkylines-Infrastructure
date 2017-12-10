@@ -86,6 +86,7 @@
     <Compile Include="UI\StronglyTypedUIHelper.cs" />
     <Compile Include="UI\Extensions\UIHelperBaseExtensions.cs" />
     <Compile Include="UserModBase.cs" />
+    <Compile Include="Utils\UnityObjectUtils.cs" />
     <Compile Include="Validation\Arguments\FloatExtensions.cs" />
     <Compile Include="Validation\Arguments\EnumerableExtensions.cs" />
     <Compile Include="Validation\Arguments\IntExtensions.cs" />
