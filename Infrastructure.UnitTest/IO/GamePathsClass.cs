@@ -3,7 +3,7 @@
     using System;
     using System.IO;
     using FluentAssertions;
-    using Infrastructure.IO;
+    using SexyFishHorse.CitiesSkylines.Infrastructure.IO;
     using Xunit;
 
     public class GamePathsClass

@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using AutoFixture;
     using FluentAssertions;
-    using Infrastructure.Validation.Arguments;
-    using Ploeh.AutoFixture;
+    using SexyFishHorse.CitiesSkylines.Infrastructure.Validation.Arguments;
     using Xunit;
 
     public class EnumerableExtensionsClass
@@ -23,7 +23,7 @@
             {
                 var list = fixture.CreateMany<string>();
 
-                list.Invoking(x => x.ShouldNotBeNullOrEmpty(fixture.Create<string>())).ShouldNotThrow();
+                list.Invoking(x => x.ShouldNotBeNullOrEmpty(fixture.Create<string>())).Should().NotThrow();
             }
 
             [Fact]
@@ -33,7 +33,8 @@
                 var list = new List<string>();
 
                 list.Invoking(x => x.ShouldNotBeNullOrEmpty(parameterName))
-                    .ShouldThrow<ArgumentException>()
+                    .Should()
+                    .Throw<ArgumentException>()
                     .And.ParamName.Should()
                     .Be(parameterName);
             }
@@ -46,7 +47,8 @@
 
                 // ReSharper disable once ExpressionIsAlwaysNull
                 list.Invoking(x => x.ShouldNotBeNullOrEmpty(parameterName))
-                    .ShouldThrow<ArgumentNullException>()
+                    .Should()
+                    .Throw<ArgumentNullException>()
                     .And.ParamName.Should()
                     .Be(parameterName);
             }

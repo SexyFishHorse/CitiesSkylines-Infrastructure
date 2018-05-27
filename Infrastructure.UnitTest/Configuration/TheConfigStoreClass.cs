@@ -5,10 +5,10 @@
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
+    using AutoFixture;
+    using AutoFixture.AutoMoq;
     using FluentAssertions;
     using Moq;
-    using Ploeh.AutoFixture;
-    using Ploeh.AutoFixture.AutoMoq;
     using SexyFishHorse.CitiesSkylines.Infrastructure.Configuration;
     using SexyFishHorse.CitiesSkylines.Infrastructure.IO;
     using Xunit;
@@ -81,7 +81,7 @@
 
                 Action act = () => instance.GetSetting<object>(null);
 
-                act.ShouldThrow<ArgumentNullException>();
+                act.Should().Throw<ArgumentNullException>();
             }
         }
 
@@ -118,7 +118,7 @@
 
                 Action act = () => instance.HasSetting(null);
 
-                act.ShouldThrow<ArgumentNullException>();
+                act.Should().Throw<ArgumentNullException>();
             }
         }
 
@@ -153,49 +153,12 @@
 
                 Action act = () => instance.RemoveSetting(null);
 
-                act.ShouldThrow<ArgumentNullException>();
+                act.Should().Throw<ArgumentNullException>();
             }
         }
 
         public class TheSaveSettingMethod : TheConfigStoreClass
         {
-            [Fact]
-            [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute", Justification = "For testing purposes.")]
-            public void ShouldThrowExceptionIfKeyIsNull()
-            {
-                var instance = fixture.Create<ConfigStore>();
-
-                Action act = () => instance.SaveSetting(null, fixture.Create<object>());
-
-                act.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("key");
-            }
-
-            [Fact]
-            [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute", Justification = "For testing purposes.")]
-            public void ShouldThrowExceptionIfValueIsNull()
-            {
-                var instance = fixture.Create<ConfigStore>();
-
-                Action act = () => instance.SaveSetting<object>(fixture.Create<string>(), null);
-
-                act.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("value");
-            }
-
-            [Fact]
-            public void ShouldSaveSettingsToDisk()
-            {
-                var setting = fixture.Create<KeyValuePair<string, object>>();
-
-                var fileSystemWrapper = fixture.Freeze<Mock<IXmlFileSystem<ModConfiguration>>>();
-                var instance = fixture.Create<ConfigStore>();
-
-                instance.SaveSetting(setting.Key, setting.Value);
-
-                fileSystemWrapper.Verify(
-                    x => x.SaveObjectToFile(It.IsAny<FileInfo>(), It.Is<ModConfiguration>(config => config.Settings.Contains(setting))),
-                    Times.Once);
-            }
-
             [Fact]
             public void ShouldOverwriteExistingSettings()
             {
@@ -215,6 +178,43 @@
                         It.Is<ModConfiguration>(
                             config => config.Settings.Contains(setting) == false && config.Settings.Contains(newSetting))),
                     Times.Once);
+            }
+
+            [Fact]
+            public void ShouldSaveSettingsToDisk()
+            {
+                var setting = fixture.Create<KeyValuePair<string, object>>();
+
+                var fileSystemWrapper = fixture.Freeze<Mock<IXmlFileSystem<ModConfiguration>>>();
+                var instance = fixture.Create<ConfigStore>();
+
+                instance.SaveSetting(setting.Key, setting.Value);
+
+                fileSystemWrapper.Verify(
+                    x => x.SaveObjectToFile(It.IsAny<FileInfo>(), It.Is<ModConfiguration>(config => config.Settings.Contains(setting))),
+                    Times.Once);
+            }
+
+            [Fact]
+            [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute", Justification = "For testing purposes.")]
+            public void ShouldThrowExceptionIfKeyIsNull()
+            {
+                var instance = fixture.Create<ConfigStore>();
+
+                Action act = () => instance.SaveSetting(null, fixture.Create<object>());
+
+                act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("key");
+            }
+
+            [Fact]
+            [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute", Justification = "For testing purposes.")]
+            public void ShouldThrowExceptionIfValueIsNull()
+            {
+                var instance = fixture.Create<ConfigStore>();
+
+                Action act = () => instance.SaveSetting<object>(fixture.Create<string>(), null);
+
+                act.Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("value");
             }
         }
     }

@@ -1,9 +1,9 @@
 ﻿namespace SexyFishHorse.CitiesSkylines.Infrastructure.UnitTest.Validation.Arguments
 {
     using System;
+    using AutoFixture;
     using FluentAssertions;
-    using Infrastructure.Validation.Arguments;
-    using Ploeh.AutoFixture;
+    using SexyFishHorse.CitiesSkylines.Infrastructure.Validation.Arguments;
     using Xunit;
 
     public class StringExtensionsClass
@@ -22,7 +22,7 @@
             {
                 var value = fixture.Create<string>();
 
-                value.Invoking(x => x.ShouldNotBeNullOrEmpty(fixture.Create<string>())).ShouldNotThrow();
+                value.Invoking(x => x.ShouldNotBeNullOrEmpty(fixture.Create<string>())).Should().NotThrow();
             }
 
             [Fact]
@@ -32,7 +32,7 @@
                 var value = string.Empty;
 
                 value.Invoking(x => x.ShouldNotBeNullOrEmpty(parameterName))
-                     .ShouldThrow<ArgumentException>()
+                     .Should().Throw<ArgumentException>()
                      .And.ParamName.Should()
                      .Be(parameterName);
             }
@@ -45,7 +45,7 @@
 
                 // ReSharper disable once ExpressionIsAlwaysNull
                 value.Invoking(x => x.ShouldNotBeNullOrEmpty(parameterName))
-                     .ShouldThrow<ArgumentNullException>()
+                     .Should().Throw<ArgumentNullException>()
                      .And.ParamName.Should()
                      .Be(parameterName);
             }
